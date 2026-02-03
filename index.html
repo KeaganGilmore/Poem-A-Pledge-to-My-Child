@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Pledge To My Child - Keagan Gilmore</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Cormorant', Georgia, serif;
+            position: relative;
+            color: #e8e4df;
+            background: #0a0a0f;
+        }
+
+        /* === TURBULENT SKY - stormy, ominous, alive === */
+        .sky-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -3;
+            overflow: hidden;
+        }
+
+        /* Base: deep bruised sky */
+        .sky-base {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 150% 80% at 20% 10%, rgba(45, 27, 60, 0.9) 0%, transparent 50%),
+                radial-gradient(ellipse 120% 90% at 80% 20%, rgba(20, 30, 55, 0.95) 0%, transparent 60%),
+                radial-gradient(ellipse 200% 100% at 50% 100%, rgba(90, 40, 30, 0.4) 0%, transparent 40%),
+                linear-gradient(
+                    180deg,
+                    #0d0d15 0%,
+                    #151520 20%,
+                    #1a1a28 40%,
+                    #1f1a25 60%,
+                    #251a20 80%,
+                    #1a1215 100%
+                );
+        }
+
+        /* Storm clouds - moving, layered, ominous */
+        .cloud-layer {
+            position: absolute;
+            inset: 0;
+            opacity: 0.7;
+        }
+
+        .storm-cloud {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: drift-cloud 40s ease-in-out infinite;
+        }
+
+        .storm-cloud.dark {
+            background: radial-gradient(ellipse, rgba(15, 15, 25, 0.9) 0%, transparent 70%);
+        }
+
+        .storm-cloud.bruise {
+            background: radial-gradient(ellipse, rgba(50, 30, 60, 0.6) 0%, transparent 70%);
+        }
+
+        .storm-cloud.ember {
+            background: radial-gradient(ellipse, rgba(80, 30, 20, 0.3) 0%, transparent 70%);
+        }
+
+        @keyframes drift-cloud {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -20px) scale(1.1); }
+            66% { transform: translate(-30px, 15px) scale(0.95); }
+        }
+
+        /* Occasional lightning flicker in distance */
+        .lightning {
+            position: absolute;
+            top: 5%;
+            width: 100%;
+            height: 30%;
+            background: radial-gradient(ellipse 30% 50% at 70% 30%, rgba(200, 180, 255, 0.03) 0%, transparent 60%);
+            animation: lightning-flicker 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes lightning-flicker {
+            0%, 100% { opacity: 0; }
+            92% { opacity: 0; }
+            93% { opacity: 1; }
+            94% { opacity: 0; }
+            96% { opacity: 0.5; }
+            97% { opacity: 0; }
+        }
+
+        /* Stars peeking through breaks in clouds */
+        .stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: star-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes star-pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Distant ember glow on horizon - the fire of protection */
+        .horizon-ember {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 25%;
+            background:
+                radial-gradient(ellipse 80% 100% at 30% 100%, rgba(120, 40, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 70% 100%, rgba(100, 50, 30, 0.1) 0%, transparent 50%);
+            animation: ember-breathe 6s ease-in-out infinite;
+        }
+
+        @keyframes ember-breathe {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* === THE POEM === */
+        #poem-container {
+            position: relative;
+            z-index: 20;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Cormorant', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            text-align: center;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.5rem;
+            color: #d4cfc8;
+            text-shadow: 0 0 40px rgba(180, 160, 140, 0.2);
+        }
+
+        .author-line {
+            text-align: center;
+            font-style: italic;
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(180, 170, 160, 0.7);
+            margin-bottom: 4rem;
+            letter-spacing: 0.2em;
+        }
+
+        .stanza {
+            margin-bottom: 2.8rem;
+            font-size: 1.4rem;
+            line-height: 2.2;
+            font-weight: 400;
+            color: #c8c0b8;
+            position: relative;
+            text-align: center;
+        }
+
+        .line {
+            display: block;
+            padding: 0.2rem 0;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* The child - soft, ethereal, precious */
+        .child-word {
+            color: #a8c0d8;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(168, 192, 216, 0.3);
+        }
+
+        /* The warrior - fierce, protective, dangerous */
+        .warrior-word {
+            color: #c45c3a;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-shadow: 0 0 15px rgba(196, 92, 58, 0.4);
+        }
+
+        /* The oath - solemn, ancient, binding */
+        .oath-word {
+            color: #b8a890;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+
+        /* Final line - the culmination */
+        .stanza:last-of-type .line:last-child {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+            background: linear-gradient(90deg, #c45c3a 0%, #a8c0d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(180, 160, 140, 0.15);
+        }
+
+        .footer-date {
+            font-size: 0.9rem;
+            color: rgba(180, 170, 160, 0.5);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+        }
+
+        .license-link {
+            text-decoration: none;
+            color: rgba(180, 170, 160, 0.4);
+            font-size: 0.65rem;
+            transition: color 0.3s ease;
+        }
+
+        .license-link:hover {
+            color: rgba(180, 170, 160, 0.7);
+        }
+
+        .license-img {
+            opacity: 0.3;
+            margin-bottom: 8px;
+            transition: opacity 0.3s ease;
+            filter: grayscale(100%);
+        }
+
+        .license-link:hover .license-img {
+            opacity: 0.6;
+        }
+
+        /* === CONTROLS === */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .btn {
+            background: rgba(30, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(180, 160, 140, 0.2);
+            color: #b8a890;
+            padding: 14px 28px;
+            font-family: 'Cormorant', Georgia, serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: rgba(180, 160, 140, 0.15);
+            border-color: rgba(180, 160, 140, 0.4);
+            color: #d4cfc8;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        .author-line {
+            animation: fadeIn 1.5s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            #poem-container {
+                padding: 4rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stanza {
+                font-size: 1.15rem;
+            }
+
+            .controls {
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- The turbulent sky -->
+<div class="sky-canvas">
+    <div class="sky-base"></div>
+
+    <div class="cloud-layer">
+        <div class="storm-cloud dark" style="width: 500px; height: 300px; top: -5%; left: -10%; animation-delay: 0s;"></div>
+        <div class="storm-cloud bruise" style="width: 400px; height: 250px; top: 10%; left: 30%; animation-delay: -10s;"></div>
+        <div class="storm-cloud dark" style="width: 600px; height: 350px; top: 5%; left: 60%; animation-delay: -20s;"></div>
+        <div class="storm-cloud ember" style="width: 450px; height: 280px; top: 25%; left: 10%; animation-delay: -5s;"></div>
+        <div class="storm-cloud bruise" style="width: 350px; height: 220px; top: 35%; left: 55%; animation-delay: -15s;"></div>
+        <div class="storm-cloud dark" style="width: 550px; height: 320px; top: 50%; left: 25%; animation-delay: -25s;"></div>
+    </div>
+
+    <div class="lightning"></div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="horizon-ember"></div>
+</div>
+
+<!-- The poem -->
+<div id="poem-container">
+    <h1>A Pledge To My Child</h1>
+    <div class="author-line">Keagan Gilmore</div>
+
+    <div class="stanza">
+        <span class="line">Like a <span class="warrior-word">fire</span> I watch you <span class="child-word">grow</span></span>
+        <span class="line">You <span class="child-word">grow</span>, and change everything...</span>
+        <span class="line">You leave no choice but a new beginning</span>
+        <span class="line">But how be <span class="warrior-word">fire</span> when you can do no wrong?</span>
+    </div>
+
+    <div class="stanza">
+        <span class="line">How dare I sentence you to me!</span>
+        <span class="line">As you cling to my <span class="child-word">unworthy finger</span>, I weep.</span>
+    </div>
+
+    <div class="stanza">
+        <span class="line">You gave me the world's richest <span class="child-word">joy</span>,</span>
+        <span class="line">I robbed you of your righteous right.</span>
+        <span class="line">You cannot know the fears I have</span>
+        <span class="line">As I mumble a sorrowful lullaby.</span>
+    </div>
+
+    <div class="stanza">
+        <span class="line">The <span class="warrior-word">dark day dawns dauntingly</span></span>
+        <span class="line">As I <span class="oath-word">oath</span> to give you an opportunity</span>
+        <span class="line">May you always be in <span class="child-word">comfort</span> as you <span class="child-word">rest</span></span>
+        <span class="line">And along your path to success be <span class="child-word">blessed</span></span>
+    </div>
+
+    <div class="stanza">
+        <span class="line">What secrets do you hold</span>
+        <span class="line">For I will <span class="oath-word">dedicate</span> my life to nurturing them</span>
+        <span class="line">I kiss those <span class="child-word">puffy ocean eyes</span></span>
+        <span class="line">As I <span class="warrior-word">forbid</span> my poverty from infecting you</span>
+    </div>
+
+    <div class="stanza">
+        <span class="line">Like a <span class="warrior-word">fire</span>, I will grow</span>
+        <span class="line">I will <span class="warrior-word">burn</span> all that tries to <span class="warrior-word">harm</span> you</span>
+        <span class="line">I pave the path, for you to fulfill your potential</span>
+        <span class="line">But as a <span class="warrior-word">fire</span>, I will raise a <span class="child-word">saint</span></span>
+    </div>
+
+    <div class="footer">
+        <p class="footer-date">15 November 2022</p>
+
+        <div style="font-size: 0.65rem; line-height: 1.5;">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" class="license-link">
+                <img alt="Creative Commons License" class="license-img" style="border-width:0;" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+                <br />
+                This work is licensed under a<br>
+                Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="controls">
+    <button class="btn" onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Sparse stars peeking through storm clouds
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 25; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 2 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            star.style.animationDuration = (3 + Math.random() * 3) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Line reveal animation
+        const lines = document.querySelectorAll('.line');
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -30px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const stanza = entry.target.closest('.stanza');
+                    const linesInStanza = stanza.querySelectorAll('.line');
+                    const index = Array.from(linesInStanza).indexOf(entry.target);
+
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        lines.forEach(line => observer.observe(line));
+    });
+
+    // Simple PDF download
+    function downloadPDF() {
+        const link = document.createElement('a');
+        link.href = 'Poem__Pledge_to_my_Child.pdf';
+        link.download = 'Poem__Pledge_to_my_Child.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+</body>
+</html>
